@@ -13,7 +13,7 @@
     ```
 
 
-## How to run in Local environment
+## How to run in local environment
 
 1. node module install
 
