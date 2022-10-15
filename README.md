@@ -1,4 +1,4 @@
-## Dockerfile 실행 방법
+## How to run Dockerfile
 
 1. Image build
     
@@ -13,7 +13,7 @@
     ```
 
 
-## Local 실행 방법
+## How to run in Local environment
 
 1. node module install
 
