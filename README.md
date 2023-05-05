@@ -26,3 +26,19 @@ npm install (or npm i)
 ```
 npm start
 ```
+
+## Run Prettier, Eslint
+
+### Prettier
+
+check prettier format
+
+```bash
+npm run format
+```
+
+fix prettier format
+
+```bash
+npm run format:fix
+```
