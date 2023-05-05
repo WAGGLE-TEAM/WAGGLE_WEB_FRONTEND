@@ -41,3 +41,16 @@
     ```
     npm run format:fix
     ```
+
+### ESlint
+1. check eslint
+
+    ```
+    npm run lint
+    ```
+
+2. fix eslint
+
+    ```
+    npm run lint:fix
+    ```
