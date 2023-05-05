@@ -17,15 +17,15 @@
 
 1. node module install
 
-```
-npm install (or npm i)
-```
+    ```
+    npm install (or npm i)
+    ```
 
 2. start
 
-```
-npm start
-```
+    ```
+    npm start
+    ```
 
 ## Run Prettier, Eslint
 
@@ -33,12 +33,12 @@ npm start
 
 check prettier format
 
-```bash
-npm run format
-```
+    ```bash
+    npm run format
+    ```
 
 fix prettier format
 
-```bash
-npm run format:fix
-```
+    ```bash
+    npm run format:fix
+    ```
