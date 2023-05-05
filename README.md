@@ -31,14 +31,13 @@
 
 ### Prettier
 
-check prettier format
-
-    ```bash
+1. check prettier format
+    ```
     npm run format
     ```
 
-fix prettier format
+2. fix prettier format
 
-    ```bash
+    ```
     npm run format:fix
     ```
