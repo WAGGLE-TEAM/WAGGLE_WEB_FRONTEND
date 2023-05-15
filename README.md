@@ -21,10 +21,10 @@
     npm install (or npm i)
     ```
 
-2. start
+2. start (with next.js dev mode)
 
     ```
-    npm start
+    npm run dev
     ```
 
 ## Run Prettier, Eslint
