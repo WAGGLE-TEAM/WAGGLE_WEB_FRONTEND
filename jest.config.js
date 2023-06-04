@@ -1,10 +1,11 @@
+const { jestPathAlias } = require('./pathAlias');
+
 module.exports = {
-    "testMatch": [
-      "**/__tests__/**/*.+(ts|tsx|js)",
-      "**/?(*.)+(spec|test).+(ts|tsx|js)"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "babel-jest"
-    },
-    "testEnvironment": "jsdom",
-  }
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: [
+    '@testing-library/jest-dom/extend-expect',
+    'jest-plugin-context/setup',
+  ],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
+  moduleNameMapper: jestPathAlias,
+};
