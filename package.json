@@ -21,6 +21,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "test": "jest --watch",
+    "test:ci": "jest --ci",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
