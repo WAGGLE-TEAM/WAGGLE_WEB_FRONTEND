@@ -27,9 +27,7 @@ jobs:
       - name: Install node module
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
-      # - name: Check Prettier
-      #   run: npm run format
-      # - name: Check Eslint
-      #   run: npm run lint
-      - name: Run test
-        run: npm run test
+      - name: Check Prettier
+        run: npm run format
+      - name: Check Eslint
+        run: npm run lint
