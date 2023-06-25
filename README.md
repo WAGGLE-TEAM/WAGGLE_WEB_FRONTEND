@@ -54,3 +54,8 @@
     ```
     npm run lint:fix
     ```
+
+### Storybook
+```
+npm run storybook
+```
