@@ -1,12 +1,14 @@
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-export const plugins = [
+module.exports = {
+  plugins: [
     {
-        plugin: {
-            overrideWebpackConfig: ({ webpackConfig }) => {
-                webpackConfig.resolve.plugins.push(new TsconfigPathsPlugin({}));
-                return webpackConfig;
-            }
+      plugin: {
+        overrideWebpackConfig: ({ webpackConfig }) => {
+          webpackConfig.resolve.plugins.push(new TsconfigPathsPlugin({}));
+          return webpackConfig;
         }
+      }
     }
-];
+  ]
+};
