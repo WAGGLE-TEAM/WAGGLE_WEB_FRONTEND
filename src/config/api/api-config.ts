@@ -3,6 +3,7 @@ import { errorMessage } from '@config/status/error-message';
 
 class ApiConfig {
     readonly requestTo: AxiosInstance;
+
     private readonly requestUrl: string;
 
     constructor() {
@@ -25,7 +26,7 @@ class ApiConfig {
                 const token = await this.getTokenByRequestUrl(config.url);
 
                 if (token) {
-                    config.headers['Authorization'] = `Bearer ${token}`;
+                    config.headers.Authorization = `Bearer ${token}`;
                 }
                 return config;
             },
@@ -45,7 +46,7 @@ class ApiConfig {
                     await this.requestTokenApi(response.data.message);
 
                     const accessToken = await localStorage.getItem('access-token');
-                    config.headers['Authorization'] = `Bearer ${accessToken}`;
+                    config.headers.Authorization = `Bearer ${accessToken}`;
 
                     return axios(config);
                 }
