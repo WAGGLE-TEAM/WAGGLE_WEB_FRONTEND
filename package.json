@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -28,8 +29,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "craco build",
+    "start": "craco start",
     "eject": "react-scripts eject",
     "format": "prettier --check ./src",
     "format:fix": "prettier --write ./src",
@@ -75,6 +76,7 @@
     "prettier": "^2.8.8",
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
-    "storybook": "^7.0.23"
+    "storybook": "^7.0.23",
+    "tsconfig-paths-webpack-plugin": "^4.1.0"
   }
 }

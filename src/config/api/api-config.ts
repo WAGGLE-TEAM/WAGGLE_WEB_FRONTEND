@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { errorMessage } from './../status/error-message';
+import { errorMessage } from "@config/status/error-message";
 
 class ApiConfig {
   readonly requestTo: AxiosInstance;
