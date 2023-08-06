@@ -4,16 +4,13 @@ import { errorMessage } from '@config/status/error-message';
 class ApiConfig {
     readonly requestTo: AxiosInstance;
 
-    private readonly requestUrl: string;
-
     constructor() {
-        this.requestTo = this.getRequestTo();
-        this.requestUrl = this.getRequestUrl();
+        this.requestTo = ApiConfig.getRequestTo();
     }
 
-    private getRequestTo = () => {
+    private static getRequestTo = () => {
         const instance = axios.create({
-            baseURL: this.requestUrl,
+            baseURL: process.env.WEB_REQUEST_API,
             timeout: 30000,
             headers: {
                 withCredentials: true,
@@ -23,14 +20,14 @@ class ApiConfig {
         instance.interceptors.request.use(
             async (config) => {
                 // TODO: redux 사용 변경
-                const token = await this.getTokenByRequestUrl(config.url);
+                const token = localStorage.getItem('refresh-token');
 
                 if (token) {
                     config.headers.Authorization = `Bearer ${token}`;
                 }
                 return config;
             },
-            function (error) {
+            (error) => {
                 return Promise.reject(error);
             }
         );
@@ -43,7 +40,7 @@ class ApiConfig {
                 const { config, response } = error;
 
                 if (response.status === 401) {
-                    await this.requestTokenApi(response.data.message);
+                    await ApiConfig.requestTokenApi(response.data.message);
 
                     const accessToken = await localStorage.getItem('access-token');
                     config.headers.Authorization = `Bearer ${accessToken}`;
@@ -58,52 +55,41 @@ class ApiConfig {
         return instance;
     };
 
-    private requestTokenApi = async (message: string) => {
+    private static requestTokenApi = async (message: string) => {
         const refreshTokenForRenew = localStorage.getItem('refresh-token');
 
         switch (message) {
-            case errorMessage.ACCESS_TOKEN_INVALID:
+            case errorMessage.ACCESS_TOKEN_INVALID: {
                 const { accessToken } = (
-                    await axios.post(`${this.requestUrl}/user/access-token`, {
+                    await axios.post(`${process.env.WEB_REQUEST_API}/user/access-token`, {
                         Authorization: `Bearer ${refreshTokenForRenew}`,
                     })
                 ).data;
 
                 localStorage.setItem('accessToken', accessToken);
                 break;
+            }
 
-            case errorMessage.REFRESH_TOKEN_INVALID:
+            case errorMessage.REFRESH_TOKEN_INVALID: {
                 const { refreshToken } = (
-                    await axios.post(`${this.requestUrl}/user/refresh-token`, {
+                    await axios.post(`${process.env.WEB_REQUEST_API}/user/refresh-token`, {
                         Authorization: `Bearer ${refreshTokenForRenew}`,
                     })
                 ).data;
 
                 localStorage.setItem('refreshToken', refreshToken);
                 break;
+            }
 
-            case errorMessage.NO_SIGN_IN:
+            case errorMessage.NO_SIGN_IN: {
                 // TODO: 로그인 페이지로 전환
                 break;
+            }
+
+            default: {
+                // default
+            }
         }
-    };
-
-    private getTokenByRequestUrl = async (url: string | undefined) => {
-        if (url === '/user/refresh-token') {
-            return localStorage.getItem('refresh-token');
-        }
-
-        return localStorage.getItem('access-token');
-    };
-
-    private getRequestUrl = () => {
-        const baseUrl = process.env.WEB_REQUEST_API;
-
-        if (!baseUrl) {
-            throw errorMessage.NO_ENV_FILE;
-        }
-
-        return baseUrl;
     };
 }
 
