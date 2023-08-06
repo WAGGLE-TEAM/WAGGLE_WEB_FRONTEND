@@ -17,6 +17,14 @@ module.exports = {
   rules: {
     "no-console": ['error', {
       allow: ['debug', 'warn', 'error']
-    }]
+    }],
+    "import/no-named-as-default": 0,
+    "no-param-reassign": "off", // 파라미터는 지역변수로 받아서 쓰라는 rule
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    'react/jsx-props-no-spreading': ['warn'],   // props로 받은 것 바로 props로 넘기기 허용
+    "react/no-unescaped-entities": 0,
+    "react/function-component-definition": "off",
+    "react/require-default-props": "off",
   }
 };

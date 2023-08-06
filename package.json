@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -11,6 +12,9 @@
     "@types/node": "^16.11.65",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "env-cmd": "^10.1.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "next": "^13.4.2",
@@ -25,8 +29,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "start": "env-cmd -f .env.development craco start",
+    "start:dev": "env-cmd -f .env.development craco start",
+    "start:prod": "env-cmd -f .env.production craco start",
+    "build:dev": "env-cmd -f .env.development craco build",
+    "build:prod": "env-cmd -f .env.production craco build",
     "eject": "react-scripts eject",
     "format": "prettier --check ./src",
     "format:fix": "prettier --write ./src",
@@ -39,6 +46,17 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "rules": {
+      "no-unused-vars": "warn"
+    },
+    "overrides": [
+      {
+        "files": ["**/*.ts?(x)"],
+        "rules": {
+          "max-len": "warn"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -72,6 +90,7 @@
     "prettier": "^2.8.8",
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
-    "storybook": "^7.0.23"
+    "storybook": "^7.0.23",
+    "tsconfig-paths-webpack-plugin": "^4.1.0"
   }
 }

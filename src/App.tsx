@@ -1,14 +1,10 @@
 import React from 'react';
 import './App.css';
-import store from './store/configureStore'
 import { Provider } from 'react-redux';
+import store from './store/configureStore';
 
 function App() {
-  return (
-    <Provider store={store}>
-      
-    </Provider>
-  );
+    return <Provider store={store}>{undefined}</Provider>;
 }
 
 export default App;
