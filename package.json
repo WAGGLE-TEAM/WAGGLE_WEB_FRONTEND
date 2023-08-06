@@ -29,8 +29,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next dev",
-    "build": "craco build",
-    "start": "craco start",
+    "start": "env-cmd -f .env.development craco start",
+    "start:dev": "env-cmd -f .env.development craco start",
+    "start:prod": "env-cmd -f .env.production craco start",
+    "build:dev": "env-cmd -f .env.development craco build",
+    "build:prod": "env-cmd -f .env.production craco build",
     "eject": "react-scripts eject",
     "format": "prettier --check ./src",
     "format:fix": "prettier --write ./src",
