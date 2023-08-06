@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { errorMessage } from '@config/status/error-message';
 
 export default class ApiConfig {
