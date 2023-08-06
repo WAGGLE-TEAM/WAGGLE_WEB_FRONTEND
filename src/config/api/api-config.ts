@@ -1,14 +1,7 @@
-import axios, { AxiosInstance } from 'axios';
 import { errorMessage } from '@config/status/error-message';
 
-class ApiConfig {
-    readonly requestTo: AxiosInstance;
-
-    constructor() {
-        this.requestTo = ApiConfig.getRequestTo();
-    }
-
-    private static getRequestTo = () => {
+export default class ApiConfig {
+    public static getRequestTo = () => {
         const instance = axios.create({
             baseURL: process.env.WEB_REQUEST_API,
             timeout: 30000,
@@ -25,6 +18,7 @@ class ApiConfig {
                 if (token) {
                     config.headers.Authorization = `Bearer ${token}`;
                 }
+
                 return config;
             },
             (error) => {
@@ -42,7 +36,7 @@ class ApiConfig {
                 if (response.status === 401) {
                     await ApiConfig.requestTokenApi(response.data.message);
 
-                    const accessToken = await localStorage.getItem('access-token');
+                    const accessToken = localStorage.getItem('access-token');
                     config.headers.Authorization = `Bearer ${accessToken}`;
 
                     return axios(config);
@@ -55,7 +49,7 @@ class ApiConfig {
         return instance;
     };
 
-    private static requestTokenApi = async (message: string) => {
+    static requestTokenApi = async (message: string) => {
         const refreshTokenForRenew = localStorage.getItem('refresh-token');
 
         switch (message) {
@@ -81,16 +75,9 @@ class ApiConfig {
                 break;
             }
 
-            case errorMessage.NO_SIGN_IN: {
-                // TODO: 로그인 페이지로 전환
-                break;
-            }
-
             default: {
-                // default
+                // TODO: 로그인 페이지로 전환
             }
         }
     };
 }
-
-export default new ApiConfig();
