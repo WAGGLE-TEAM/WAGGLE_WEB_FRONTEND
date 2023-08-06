@@ -50,7 +50,7 @@ export default class ApiConfig {
         return instance;
     };
 
-    static requestTokenApi = async (message: string) => {
+    private static requestTokenApi = async (message: string) => {
         const refreshTokenForRenew = localStorage.getItem('refresh-token');
 
         switch (message) {
